@@ -1,13 +1,17 @@
-# Compiled Object files
+# Backup Source Code Files
+*.cpp~
+*.h~
+
+# Compiled Object Files
 *.slo
 *.lo
 *.o
 
-# Compiled Dynamic libraries
+# Compiled Dynamic Libraries
 *.so
 *.dylib
 
-# Compiled Static libraries
+# Compiled Static Libraries
 *.lai
 *.la
 *.a
