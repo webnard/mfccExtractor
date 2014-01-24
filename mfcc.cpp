@@ -83,12 +83,19 @@ void MFCC::initFilterBanks() {
 }
 
 
-void MFCC::setSpectrumData(double* data) { this->data = data; }
-void MFCC::setMinimumFrequency(double minFreq) { this->minFreq = minFreq; }
-void MFCC::setMaximumFrequency(double maxFreq) { this->maxFreq = maxFreq; }
+void MFCC::setSpectrumData(double* data)         { this->data = data; }
+void MFCC::setMinimumFrequency(double minFreq)   { this->minFreq = minFreq; }
+void MFCC::setMaximumFrequency(double maxFreq)   { this->maxFreq = maxFreq; }
 void MFCC::setSampleFrequency(double sampleFreq) { this->sampleFreq = sampleFreq; }
-void MFCC::setnoFilterBanks(int noFilterBanks) { this->noFilterBanks = noFilterBanks; }
-void MFCC::setNFFT(int NFFT) { this->NFFT = NFFT; }
+void MFCC::setnoFilterBanks(int noFilterBanks)   { this->noFilterBanks = noFilterBanks; }
+void MFCC::setNFFT(int NFFT)                     { this->NFFT = NFFT; }
+
+double* MFCC::getSpectrumData()     { return this->data; }
+ double MFCC::getMinimumFrequency() { return this->minFreq; }
+ double MFCC::getMaximumFrequency() { return this->maxFreq; }
+ double MFCC::getSampleFrequency()  { return this->sampleFreq; }
+    int MFCC::getnoFilterBanks()    { return this->noFilterBanks; }
+    int MFCC::getNFFT()             { return this->NFFT; }
 
 
 vector<double> MFCC::getLogCoefficents() {
