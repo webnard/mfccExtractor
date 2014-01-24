@@ -24,11 +24,6 @@ class MFCC {
 		vector<int> bins;  
 		map<int,double> binToFreq; // Frequency Bin -> Frequency (Hz) 
 
-		// Methods		
-		void applyDCT(); // Apply the Discrete Cosine Transformation
-		void applyFilterBank(); // Apply the Filter Banks
-		
-
 	public:
 		// Methods		
 
