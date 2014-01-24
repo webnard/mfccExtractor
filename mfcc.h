@@ -8,7 +8,6 @@
 #include <vector>
 #include <map>
 
-using namespace std;
 
 class MFCC {
 	private: 
@@ -46,4 +45,13 @@ class MFCC {
 		void setSampleFrequency(double);
 		void setnoFilterBanks(int);
 		void setNFFT(int);
+
+
+		double* getSpectrumData();
+		double getMinimumFrequency();
+ 		double getMaximumFrequency();
+ 		double getSampleFrequency();
+    		int getnoFilterBanks();
+    		int getNFFT();
+
 };
