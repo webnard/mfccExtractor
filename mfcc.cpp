@@ -91,11 +91,11 @@ void MFCC::setnoFilterBanks(int noFilterBanks)   { this->noFilterBanks = noFilte
 void MFCC::setNFFT(int NFFT)                     { this->NFFT = NFFT; }
 
 double* MFCC::getSpectrumData()     { return this->data; }
- double MFCC::getMinimumFrequency() { return this->minFreq; }
- double MFCC::getMaximumFrequency() { return this->maxFreq; }
- double MFCC::getSampleFrequency()  { return this->sampleFreq; }
-    int MFCC::getnoFilterBanks()    { return this->noFilterBanks; }
-    int MFCC::getNFFT()             { return this->NFFT; }
+double  MFCC::getMinimumFrequency() { return this->minFreq; }
+double  MFCC::getMaximumFrequency() { return this->maxFreq; }
+double  MFCC::getSampleFrequency()  { return this->sampleFreq; }
+int     MFCC::getnoFilterBanks()    { return this->noFilterBanks; }
+int     MFCC::getNFFT()             { return this->NFFT; }
 
 
 vector<double> MFCC::getLogCoefficents() {
