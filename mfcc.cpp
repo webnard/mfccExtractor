@@ -11,7 +11,8 @@
 
 #define _USE_MATH_DEFINES
 
-MFCC::MFCC(int noFilterBanks, int NFFT, double minFreq, double maxFreq, double sampleFreq) {
+MFCC::MFCC(int noFilterBanks, int NFFT, double minFreq, double maxFreq, double sampleFreq)
+{
 	this->noFilterBanks = noFilterBanks;
 	this->NFFT = NFFT;
 	this->minFreq = minFreq;
@@ -22,11 +23,11 @@ MFCC::MFCC(int noFilterBanks, int NFFT, double minFreq, double maxFreq, double s
 	for (int f = 0; f < 1+NFFT/2; f++) {
 		binToFreq[f] = ( (double) f * sampleFreq) / (NFFT);
 	}
-
 	initFilterBanks();
 }
 
-MFCC::MFCC(double* data, int noFilterBanks, int NFFT, double minFreq, double maxFreq, double sampleFreq) {
+MFCC::MFCC(double* data, int noFilterBanks, int NFFT, double minFreq, double maxFreq, double sampleFreq) 
+{
 	this->noFilterBanks = noFilterBanks;
 	this->NFFT = NFFT;
 	this->minFreq = minFreq;
@@ -37,12 +38,11 @@ MFCC::MFCC(double* data, int noFilterBanks, int NFFT, double minFreq, double max
 	for (int f = 0; f < 1+NFFT/2; f++) {
 		binToFreq[f] = ( (double) f * sampleFreq) / (NFFT);
 	}
-
 	initFilterBanks();
 }
 
-void MFCC::initFilterBanks() {
-
+void MFCC::initFilterBanks() 
+{
 	double maxMel = 1125 * log(1.0 + maxFreq/700.0);
 	double minMel = 1125 * log(1.0 + minFreq/700.0);
 	double dMel = (maxMel - minMel) / (noFilterBanks+1);
@@ -67,15 +67,11 @@ void MFCC::initFilterBanks() {
 
 			if ((freq <= fCentre) && (freq >= fBelow)) {
 				val = ((freq - fBelow) / (fCentre - fBelow));
-			}
-
-			else if ((freq > fCentre) && (freq <= fAbove)) {
+			} else if ((freq > fCentre) && (freq <= fAbove)) {
 				val = ((fAbove - freq) / (fAbove - fCentre));
-
+			} else {
+				val = 0.0;
 			}
-			
-			else val = (0.0);
-	
 		        fBank.push_back(val);
 		}
 		filterBanks.push_back(fBank);
@@ -98,7 +94,8 @@ int     MFCC::getnoFilterBanks()    { return this->noFilterBanks; }
 int     MFCC::getNFFT()             { return this->NFFT; }
 
 
-vector<double> MFCC::getLogCoefficents() {
+vector<double> MFCC::getLogCoefficents() 
+{
 
 	if (this->data == nullptr) { 
 		std::cout << "No Data ! " << std::endl;
@@ -130,10 +127,13 @@ vector<double> MFCC::getLogCoefficents() {
 	return postDCT;
 }
 
-int main(void) {
+int main(void) 
+{
 	// Initilise fake Spectrum data (Frequency Domain) 
 	double data[257];
-	for (int i = 0; i < 257;i++) { data[i] = (double) ((rand() % 100)/100.0); }
+	for (int i = 0; i < 257;i++) { 
+		data[i] = (double) ((rand() % 100) / 100.0);
+	}
 
 	// Initilise MFCC Object
 	// Number of Filters: 10
@@ -147,6 +147,6 @@ int main(void) {
 	for (auto& it : c) {
 		std::cout << it <<  " ";
 	}
-	cout << std::endl;
+	std::cout << std::endl;
 	return 0;
 }
