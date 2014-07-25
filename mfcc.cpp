@@ -18,7 +18,7 @@ MFCC::MFCC(int noFilterBanks, int NFFT, double minFreq, double maxFreq, double s
 	this->minFreq = minFreq;
 	this->maxFreq = maxFreq;
 	this->sampleFreq = sampleFreq;
-	this->data = nullptr;
+	this->data = NULL;
 	
 	for (int f = 0; f < 1+NFFT/2; f++) {
 		binToFreq[f] = ( (double) f * sampleFreq) / (NFFT);
@@ -97,19 +97,21 @@ int     MFCC::getNFFT()             { return this->NFFT; }
 vector<double> MFCC::getLogCoefficents() 
 {
 
-	if (this->data == nullptr) { 
+	if (this->data == NULL) { 
 		std::cout << "No Data ! " << std::endl;
 		exit(-1);
 	}
 
 	vector<double> preDCT; // Initilise pre-discrete cosine transformation vetor array
 	vector<double> postDCT;// Initilise post-discrete cosine transformation vetor array / MFCC Coefficents
- 
-	for (auto& it : filterBanks) {
+
+  vector< vector<double> >::iterator it;
+	for (it = filterBanks.begin(); it != filterBanks.end(); it++) {
 		double cel = 0;
 		int n = 0; 
-		for (auto& it2 : it) {
-			cel += it2 * data[n++];
+    vector<double>::iterator it2;
+		for(it2 = it->begin(); it2 != it->end(); it2++) {
+			cel += (*it2) * data[n++];
 		}
 		preDCT.push_back(log(cel)); // Compute the log of the spectrum
 	}
@@ -118,8 +120,9 @@ vector<double> MFCC::getLogCoefficents()
 	for (int i = 0; i < filterBanks.size(); i++) {
 		double val = 0;
 		int n = 0;
-		for (auto& it : preDCT) {
-			val += it * cos(i * (n++ - 0.5) *  M_PI / filterBanks.size());
+    vector<double>::iterator it;
+		for (it = preDCT.begin(); it!=preDCT.end(); it++) {
+			val += (*it) * cos(i * (n++ - 0.5) *  M_PI / filterBanks.size());
 		}
 		val /= filterBanks.size();
 		postDCT.push_back(val); 
@@ -144,8 +147,9 @@ int main(void)
 	MFCC mfcc(10,512,300.0,8000.0,16000.0);
 	mfcc.setSpectrumData(data); // Set the data pointer in the MFCC object. 
 	vector<double> c = mfcc.getLogCoefficents();
-	for (auto& it : c) {
-		std::cout << it <<  " ";
+  vector<double>::iterator it;
+	for (it = c.begin(); it!=c.end(); it++) {
+		std::cout << *it <<  " ";
 	}
 	std::cout << std::endl;
 	return 0;
